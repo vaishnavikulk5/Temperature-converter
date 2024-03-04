@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Converter</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+  <script>
+    $(document).ready(function(){
+            $("input").focus(function(){
+                $(this).css("background-color","lightgrey")
+            });
+            $("input").blur(function(){
+                $(this).css("background-color","white")
+            });
+        });
+  </script>
+    <style>
+    
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url("pic.jpeg");
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #converter {
+            background-color: #7062265c;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #000000;
+        }
+
+        input {
+            width: calc(100% - 20px);
+            padding: 8px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+        }
+
+
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input:invalid {
+            border: 1px solid #ff6347;
+        }
+
+        input:focus:invalid {
+            outline: none;
+        }
+
+        input[type="radio"] {
+            margin-right: 5px;
+        }
+
+        button {
+            background-color: #186e1b;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0f4512;
+        }
+
+        #result {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="converter">
+    <h2>Temperature Converter</h2>
+    <label for="temperature">Enter Temperature:</label>
+    <input type="text" id="temperature" pattern="\d+(\.\d+)?" placeholder="Enter temperature">
+    <br>
+    <label><input type="radio" name="scale" value="fahrenheit" checked> Fahrenheit</label>
+    <label><input type="radio" name="scale" value="celsius"> Celsius</label>
+    <br>
+    <button onclick="convert()">Convert</button>
+    <div id="result">Result: </div>
+</div>
+
+<script>
+    function convert() {
+        var temperatureInput = document.getElementById('temperature').value;
+        var scale = document.querySelector('input[name="scale"]:checked').value;
+
+        if (scale === 'fahrenheit') {
+            var celsiusResult = (parseFloat(temperatureInput) - 32) * 5 / 9;
+            document.getElementById('result').textContent = "Result: " + celsiusResult.toFixed(2) + "°C";
+        } else {
+            var fahrenheitResult = (parseFloat(temperatureInput) * 9 / 5) + 32;
+            document.getElementById('result').textContent = "Result: " + fahrenheitResult.toFixed(2) + "°F";
+        }
+    }
+</script>
+
+</body>
+</html>
